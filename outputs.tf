@@ -27,3 +27,13 @@ output "s3_bucket_name" {
   description = "S3 bucket name"
   value       = module.s3_bucket.bucket_name
 }
+output "total_resources" {
+  description = "Total number of resources created"
+
+  value = (
+    1 + # VPC
+    length(module.subnets) +
+    length(module.ec2_instances) +
+    1 # S3 bucket
+  )
+}
